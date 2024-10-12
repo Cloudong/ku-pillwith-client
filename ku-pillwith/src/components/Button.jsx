@@ -4,12 +4,12 @@ import styled from "styled-components";
 //전체 button style
 
 const StyledButton = styled.button`
-  width: 83px;
+  width: 99px;
   height: 32px;
   display: inline-block;
   text-align: center;
   overflow: hidden;
-  padding: 8px;
+  padding: 0 8px;
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   font-size: 16px;
@@ -21,7 +21,7 @@ const StyledButton = styled.button`
     border: 1px solid #808183;
   }
 
-  &.green {
+  &.purple {
     background-color: #8276f4;
     border: 1px solid #8276f4;
   }

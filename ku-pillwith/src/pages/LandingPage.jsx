@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LandingImg from "../assets/Landing_main.png";
 import Landing_1 from "../assets/Landing_1.png";
 import Landing_2 from "../assets/Landing_2.png";
+import MainBar from "../bar/MainBar";
 
 const Container = styled.div`
   width: calc(100%);
@@ -95,6 +96,7 @@ function LandingPage() {
     " 내가 먹는 약물의 정보를 알아가는 것은\n질병 치료의 첫번째 단계입니다.\n필위드(PILLWITH)가 여러분들의\n건강 관리를 체계적으로 도와드리겠습니다.";
   return (
     <Container>
+      <MainBar />
       <TextContainer className="main">
         <Text className="title">{MainTitle}</Text>
         <Text className="sub">{MainSubTitle}</Text>
