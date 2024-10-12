@@ -1,9 +1,13 @@
 import "./App.css";
-import LandingPage from "./pages/LandingPage";
+import { UserProvider } from "./api/UserContext";
 import Router from "./route/Router";
 
 function App() {
-  return <Router />;
+  return (
+    <UserProvider>
+      <Router />
+    </UserProvider>
+  );
 }
 
 export default App;

@@ -96,6 +96,7 @@ function LandingPage() {
   const MedicineTitle = "내가 먹는\n의약품 알아보기";
   const MedicineSubTitle =
     " 내가 먹는 약물의 정보를 알아가는 것은\n질병 치료의 첫번째 단계입니다.\n필위드(PILLWITH)가 여러분들의\n건강 관리를 체계적으로 도와드리겠습니다.";
+
   return (
     <Container>
       <MainBar />
