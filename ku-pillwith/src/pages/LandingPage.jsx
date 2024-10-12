@@ -120,7 +120,13 @@ function LandingPage() {
             <Text className="title">{LoginMainTitle}</Text>
             <Text className="sub">{LoginMainSubTitle}</Text>
             <ButtonContainer>
-              <Button title="복용 일정 등록하기" className="lightgrey" />
+              <Button
+                title="복용 일정 등록하기"
+                onClick={() => {
+                  navigate("/schedule");
+                }}
+                className="lightgrey"
+              />
               <Button
                 title="의약품 검색하기"
                 onClick={() => {
