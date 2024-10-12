@@ -105,7 +105,7 @@ function LandingPage() {
   const MedicineSubTitle =
     " 내가 먹는 약물의 정보를 알아가는 것은\n질병 치료의 첫번째 단계입니다.\n필위드(PILLWITH)가 여러분들의\n건강 관리를 체계적으로 도와드리겠습니다.";
 
-  const LoginMainTitle = `안녕하세요,\n${user ? user.nickname : "사용자"}님`;
+  const LoginMainTitle = `안녕하세요,\n${user ? user.name : "사용자"}님`;
   const LoginMainSubTitle =
     "약을 정해진 시간에 잘 복용하고 계신가요?\n이제 쉽고, 편리하게\nKU_PILLWITH로 관리하세요";
   return (
