@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
+import ScheduleItem from "../components/ScheduleItem";
 
 const Container = styled.div`
   width: calc(100%);
@@ -34,7 +35,7 @@ const Text = styled.div`
     color: #757575;
     font-size: 28px;
     font-weight: 400;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
   }
 `;
 
@@ -56,6 +57,7 @@ function ScheduleListPage() {
       <Text className="sub">
         추가하거나 삭제하고 싶은 의약품을 선택해주세요
       </Text>
+      <ScheduleItem />
       <ButtonContainer>
         <Button
           title="추가하기"
