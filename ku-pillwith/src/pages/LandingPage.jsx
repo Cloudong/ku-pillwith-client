@@ -111,7 +111,7 @@ function LandingPage() {
   return (
     <Container>
       <MainBar />
-      {!user ? (
+      {user ? (
         <>
           <TextContainer className="main">
             <Text className="title">{LoginMainTitle}</Text>

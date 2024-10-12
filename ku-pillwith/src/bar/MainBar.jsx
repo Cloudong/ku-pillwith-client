@@ -52,7 +52,7 @@ function MainBar() {
 
   return (
     <Container>
-      <NavItem to="/" exact>
+      <NavItem to="/" exact="true">
         <LogoImage image={Logo}></LogoImage>
       </NavItem>
       {user ? (
