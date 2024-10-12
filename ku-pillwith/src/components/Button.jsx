@@ -16,6 +16,11 @@ const StyledButton = styled.button`
   color: white;
   border-radius: 8px;
 
+  &.black {
+    background-color: #2c2c2c;
+    border: 1px solid #2c2c2c;
+  }
+
   &.lightgrey {
     background-color: #b2b2b2;
     border: 1px solid #b2b2b2;
