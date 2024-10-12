@@ -6,6 +6,7 @@ import Landing_2 from "../assets/Landing_2.png";
 import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
 import { useUser } from "../api/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: calc(100%);
@@ -93,6 +94,7 @@ const Image = styled.div`
 
 function LandingPage() {
   const { user } = useUser();
+  const navigate = useNavigate();
 
   const MainTitle = "우리 가족 의약품\n복용 일정 관리";
   const MainSubTitle =
@@ -108,6 +110,7 @@ function LandingPage() {
   const LoginMainTitle = `안녕하세요,\n${user ? user.name : "사용자"}님`;
   const LoginMainSubTitle =
     "약을 정해진 시간에 잘 복용하고 계신가요?\n이제 쉽고, 편리하게\nKU_PILLWITH로 관리하세요";
+
   return (
     <Container>
       <MainBar />
@@ -118,7 +121,13 @@ function LandingPage() {
             <Text className="sub">{LoginMainSubTitle}</Text>
             <ButtonContainer>
               <Button title="복용 일정 등록하기" className="lightgrey" />
-              <Button title="의약품 검색하기" className="black" />
+              <Button
+                title="의약품 검색하기"
+                onClick={() => {
+                  navigate("/search");
+                }}
+                className="black"
+              />
             </ButtonContainer>
           </TextContainer>
 
@@ -129,7 +138,13 @@ function LandingPage() {
           <TextContainer className="main">
             <Text className="title">{MainTitle}</Text>
             <Text className="sub">{MainSubTitle}</Text>
-            <Button title="KU_PILLWITH 사용하러 가기" className="lightgrey" />
+            <Button
+              title="KU_PILLWITH 사용하러 가기"
+              onClick={() => {
+                navigate("/login");
+              }}
+              className="lightgrey"
+            />
           </TextContainer>
           <ContentWrapper>
             <TextContainer className="article1">
