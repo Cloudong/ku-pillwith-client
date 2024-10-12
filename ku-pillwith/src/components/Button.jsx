@@ -4,17 +4,22 @@ import styled from "styled-components";
 //전체 button style
 
 const StyledButton = styled.button`
-  width: 99px;
+  min-width: 99px;
   height: 32px;
   display: inline-block;
   text-align: center;
   overflow: hidden;
-  padding: 0 8px;
+  padding: 0 20px;
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   border-radius: 8px;
+
+  &.lightgrey {
+    background-color: #b2b2b2;
+    border: 1px solid #b2b2b2;
+  }
 
   &.grey {
     background-color: #808183;

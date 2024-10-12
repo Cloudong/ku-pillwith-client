@@ -4,6 +4,7 @@ import LandingImg from "../assets/Landing_main.png";
 import Landing_1 from "../assets/Landing_1.png";
 import Landing_2 from "../assets/Landing_2.png";
 import MainBar from "../bar/MainBar";
+import Button from "../components/Button";
 
 const Container = styled.div`
   width: calc(100%);
@@ -35,6 +36,7 @@ const TextContainer = styled.div`
     align-items: flex-end;
     justify-content: center;
     flex-direction: column;
+    gap: 20px;
     text-align: right;
     padding-right: 40px;
   }
@@ -100,6 +102,7 @@ function LandingPage() {
       <TextContainer className="main">
         <Text className="title">{MainTitle}</Text>
         <Text className="sub">{MainSubTitle}</Text>
+        <Button title="KU_PILLWITH 사용하러 가기" className="lightgrey" />
       </TextContainer>
       <ContentWrapper>
         <TextContainer className="article1">
