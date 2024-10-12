@@ -20,7 +20,7 @@ const Text = styled.div`
   white-space: pre-wrap;
 
   &.title {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
     padding-top: 40px;
     padding-bottom: 8px;
@@ -28,7 +28,7 @@ const Text = styled.div`
 
   &.sub {
     color: #757575;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 400;
     padding-bottom: 40px;
   }

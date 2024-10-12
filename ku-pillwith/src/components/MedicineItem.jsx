@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MedicineImg from "../assets/MedicineItem.png";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: calc(100%);
@@ -24,7 +25,7 @@ const Image = styled.div`
   width: 60px;
   height: 60px;
   background-image: url(${(props) => props.image});
-  background-size: cover; /* 또는 contain */
+  background-size: cover;
   background-position: center;
 `;
 
@@ -52,11 +53,17 @@ const Text = styled.div`
   }
 `;
 
+//[todo] : medicineItem 클릭이벤트 -> medicine page로 이동
 function MedicineItem(props) {
-  const { name, type, imgUrl } = props;
+  const { id, name, type, imgUrl } = props;
+  const navigate = useNavigate();
 
   return (
-    <Container>
+    <Container
+      onClick={() => {
+        navigate(`/medicine/${id}`);
+      }}
+    >
       <ImgWrapper>
         <Image image={imgUrl ? imgUrl : MedicineImg}></Image>
       </ImgWrapper>
