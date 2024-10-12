@@ -6,6 +6,7 @@ import RegisterPage from "../pages/RegisterPage";
 import SearchPage from "../pages/SearchPage";
 import MedicinePage from "../pages/MedicinePage";
 import ScheduleMainPage from "../pages/ScheduleMainPage";
+import ScheduleListPage from "../pages/ScheduleListPage";
 
 function Router() {
   return (
@@ -17,6 +18,7 @@ function Router() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/medicine/:id" element={<MedicinePage />} />
         <Route path="/schedule" element={<ScheduleMainPage />} />
+        <Route path="/schedule/:time" element={<ScheduleListPage />} />
       </Routes>
     </BrowserRouter>
   );

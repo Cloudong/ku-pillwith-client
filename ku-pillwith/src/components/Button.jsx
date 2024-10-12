@@ -35,6 +35,16 @@ const StyledButton = styled.button`
     background-color: #8276f4;
     border: 1px solid #8276f4;
   }
+
+  &.green {
+    background-color: #366943;
+    border: 1px solid #366943;
+  }
+
+  &.red {
+    background-color: #d53d3d;
+    border: 1px solid #d53d3d;
+  }
 `;
 
 function Button(props) {
