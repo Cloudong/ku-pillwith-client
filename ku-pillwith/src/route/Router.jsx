@@ -9,6 +9,7 @@ import ScheduleMainPage from "../pages/ScheduleMainPage";
 import ScheduleListPage from "../pages/ScheduleListPage";
 import ScheduleSearchPage from "../pages/ScheduleSearchPage";
 import ScheduleDosagePage from "../pages/ScheduleDosagePage";
+import MyPage from "../pages/MyPage";
 
 function Router() {
   return (
@@ -17,6 +18,7 @@ function Router() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/mypage" element={<MyPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/medicine/:id" element={<MedicinePage />} />
         <Route path="/schedule" element={<ScheduleMainPage />} />

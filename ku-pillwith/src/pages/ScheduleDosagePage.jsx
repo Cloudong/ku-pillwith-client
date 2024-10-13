@@ -75,7 +75,7 @@ const SelectField = styled.select`
 
 //[todo] : medicine_id로 medicine 정보 받아오기
 //[todo] : 복용량 -> 텍스트 입력 / 복용단위 -> 드롭다운 입력으로 받기
-//[todo] : 추가하기 버튼 누르면 복용량, 복용단위 포함해서 일정 정보 저장(api 통신) -> 목록 페이지로 돌아감
+//[todo] : 추가하기 버튼 누르면 복용량, 복용단위, user 정보 포함해서 일정 정보 저장(api 통신) -> 목록 페이지로 돌아감
 function ScheduleDosagePage(props) {
   const { medicine_id } = useParams();
 
