@@ -77,14 +77,13 @@ function ScheduleSearchPage() {
         <FiSearch size="48" onClick={handleSearch} />
       </InputContainer>
       <MedicineContainer>
-        <MedicineItem page={1} />
         {medicines.map((medicine) => (
           <MedicineItem
             key={medicine.id}
             name={medicine.name}
             type={medicine.type}
             imgUrl={medicine.imgUrl}
-            page={1}
+            page="schedule"
           />
         ))}
       </MedicineContainer>

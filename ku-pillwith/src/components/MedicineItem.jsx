@@ -57,10 +57,18 @@ const Text = styled.div`
 function MedicineItem(props) {
   const { id, name, type, imgUrl, page } = props;
   const navigate = useNavigate();
+
   const handleClick = () => {
-    if (page == 0) navigate(`/medicine/${id}`);
-    else navigate(`/schedule/search/${id}`);
+    console.log(page);
+    if (page === "search") {
+      navigate(`/medicine/${id}`);
+    } else if (page === "schedule") {
+      navigate(`/schedule/search/${id}`);
+    } else {
+      console.error("Invalid page prop:", page);
+    }
   };
+
   return (
     <Container onClick={handleClick}>
       <ImgWrapper>
