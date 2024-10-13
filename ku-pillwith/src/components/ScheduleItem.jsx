@@ -55,44 +55,9 @@ const Text = styled.div`
   }
 `;
 
-const EditableText = styled.div`
-  cursor: pointer;
-`;
-
-const InputField = styled.input`
-  display: block;
-  width: 169px;
-  height: 21px;
-  padding-left: 10px;
-  border: 1px solid #d9d9d9;
-  border-radius: 16px;
-
-  &:focus {
-    outline: 3px auto #8276f4;
-    outline-offset: 2px;
-    border-color: transparent;
-  }
-`;
-
 //[todo] : 삭제 버튼 클릭 후 사용자 일정 목록에서 제외 기능 구현
 function ScheduleItem(props) {
-  const { name, type, imgUrl } = props;
-  const [dosage, setDosage] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleTextClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleInputChange = (e) => {
-    setDosage(e.target.value);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      setIsEditing(false);
-    }
-  };
+  const { name, type, dosage, imgUrl } = props;
 
   return (
     <Container>
@@ -101,23 +66,7 @@ function ScheduleItem(props) {
         <TextContainer>
           <Text className="title">{name ? name : "약 이름"}</Text>
           <Text className="sub">{type ? type : "약 종류"}</Text>
-          {isEditing ? (
-            <InputField
-              value={dosage}
-              placeholder="복용량을 입력해주세요"
-              onChange={handleInputChange}
-              onKeyUp={handleKeyPress}
-              autoFocus
-            />
-          ) : (
-            <EditableText onClick={handleTextClick}>
-              <Text className="dosage">
-                {dosage
-                  ? `${dosage}밀리그램`
-                  : "복용량을 입력해주세요(밀리그램)"}
-              </Text>
-            </EditableText>
-          )}
+          <Text className="dosage">{dosage ? dosage : "복용량"}</Text>
         </TextContainer>
       </DescriptionContainer>
       <Button title="삭제" className="red" />
