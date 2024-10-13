@@ -55,15 +55,14 @@ const Text = styled.div`
 
 //[todo] : medicineItem 클릭이벤트 -> medicine page로 이동
 function MedicineItem(props) {
-  const { id, name, type, imgUrl } = props;
+  const { id, name, type, imgUrl, page } = props;
   const navigate = useNavigate();
-
+  const handleClick = () => {
+    if (page == 0) navigate(`/medicine/${id}`);
+    else navigate(`/schedule/search/${id}`);
+  };
   return (
-    <Container
-      onClick={() => {
-        navigate(`/medicine/${id}`);
-      }}
-    >
+    <Container onClick={handleClick}>
       <ImgWrapper>
         <Image image={imgUrl ? imgUrl : MedicineImg}></Image>
       </ImgWrapper>

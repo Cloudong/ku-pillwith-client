@@ -39,7 +39,7 @@ const Text = styled.div`
 `;
 
 function ScheduleMainPage() {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   return (
     <Container>
       <MainBar />
@@ -48,7 +48,7 @@ function ScheduleMainPage() {
       <Text
         className="type"
         onClick={() => {
-          navigator("/schedule/morning");
+          navigate("/schedule/morning");
         }}
       >
         아침
@@ -56,7 +56,7 @@ function ScheduleMainPage() {
       <Text
         className="type"
         onClick={() => {
-          navigator("/schedule/afternoon");
+          navigate("/schedule/afternoon");
         }}
       >
         점심
@@ -64,7 +64,7 @@ function ScheduleMainPage() {
       <Text
         className="type"
         onClick={() => {
-          navigator("/schedule/evening");
+          navigate("/schedule/evening");
         }}
       >
         저녁

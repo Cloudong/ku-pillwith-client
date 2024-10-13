@@ -58,7 +58,6 @@ const Text = styled.div`
 //[todo] : 삭제 버튼 클릭 후 사용자 일정 목록에서 제외 기능 구현
 function ScheduleItem(props) {
   const { name, type, dosage, imgUrl } = props;
-
   return (
     <Container>
       <DescriptionContainer>
@@ -69,7 +68,7 @@ function ScheduleItem(props) {
           <Text className="dosage">{dosage ? dosage : "복용량"}</Text>
         </TextContainer>
       </DescriptionContainer>
-      <Button title="삭제" className="red" />
+      <Button title="삭제" onClick={() => {}} className="red" />
     </Container>
   );
 }

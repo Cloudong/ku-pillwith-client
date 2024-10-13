@@ -47,7 +47,7 @@ const ButtonContainer = styled.div`
 
 function ScheduleListPage() {
   const { time } = useParams();
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const Title = `${TimeText[time]} 일정 관리하기`;
 
   return (
@@ -62,14 +62,14 @@ function ScheduleListPage() {
         <Button
           title="추가하기"
           onClick={() => {
-            navigator("/schedule/search");
+            navigate("/schedule/search");
           }}
           className="green"
         />
         <Button
           title="완료"
           onClick={() => {
-            navigator("/");
+            navigate("/");
           }}
           className="grey"
         />

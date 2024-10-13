@@ -102,6 +102,7 @@ function SearchPage() {
             name={medicine.name}
             type={medicine.type}
             imgUrl={medicine.imgUrl}
+            page={0}
           />
         ))}
       </MedicineContainer>

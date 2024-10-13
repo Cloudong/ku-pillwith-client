@@ -7,6 +7,8 @@ import SearchPage from "../pages/SearchPage";
 import MedicinePage from "../pages/MedicinePage";
 import ScheduleMainPage from "../pages/ScheduleMainPage";
 import ScheduleListPage from "../pages/ScheduleListPage";
+import ScheduleSearchPage from "../pages/ScheduleSearchPage";
+import ScheduleDosagePage from "../pages/ScheduleDosagePage";
 
 function Router() {
   return (
@@ -19,6 +21,8 @@ function Router() {
         <Route path="/medicine/:id" element={<MedicinePage />} />
         <Route path="/schedule" element={<ScheduleMainPage />} />
         <Route path="/schedule/:time" element={<ScheduleListPage />} />
+        <Route path="/schedule/search" element={<ScheduleSearchPage />} />
+        <Route path="/schedule/search/:id" element={<ScheduleDosagePage />} />
       </Routes>
     </BrowserRouter>
   );
