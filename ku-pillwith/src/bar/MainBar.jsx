@@ -1,10 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useUser } from "../api/UserContext";
 import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
-import { FiUser, FiBell } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
 
 const Container = styled.div`
   width: calc(100%);
@@ -49,6 +49,7 @@ const NavItem = styled(NavLink)`
 //[todo] : mainbar 퍼블리싱 및 onclick event
 function MainBar() {
   const { user } = useUser();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -57,8 +58,12 @@ function MainBar() {
       </NavItem>
       {user ? (
         <ButtonContainer className="icon">
-          <FiBell size="30" onClick={() => {}} />
-          <FiUser size="30" onClick={() => {}} />
+          <FiUser
+            size="30"
+            onClick={() => {
+              navigate("/mypage");
+            }}
+          />
         </ButtonContainer>
       ) : (
         <ButtonContainer>

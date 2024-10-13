@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FiSearch } from "react-icons/fi";
 import MainBar from "../bar/MainBar";
+import { FiSearch } from "react-icons/fi";
 import MedicineItem from "../components/MedicineItem";
-
-//[todo] : 의약품 검색 페이지 퍼블리싱
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: calc(100%);
@@ -13,25 +12,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-`;
-
-const Text = styled.div`
-  font-family: "Inter", sans-serif;
-  white-space: pre-wrap;
-
-  &.title {
-    font-size: 40px;
-    font-weight: 700;
-    padding-top: 40px;
-    padding-bottom: 8px;
-  }
-
-  &.sub {
-    color: #757575;
-    font-size: 28px;
-    font-weight: 400;
-    padding-bottom: 40px;
-  }
 `;
 
 const InputContainer = styled.div`
@@ -63,10 +43,13 @@ const MedicineContainer = styled.div`
   margin-top: 40px;
 `;
 
-//[todo] : 의약품 정보 불러오기
-function SearchPage() {
+//[todo] : 일정 관리->약 검색 페이지
+//[todo] : 약 아이템 클릭-> 복용량 수정 페이지 이동
+
+function ScheduleSearchPage() {
   const [search, setSearch] = useState("");
   const [medicines, setMedicines] = useState([]);
+  const id = 1;
 
   const handleSearch = async () => {
     if (search.trim() === "") return;
@@ -84,8 +67,6 @@ function SearchPage() {
   return (
     <Container>
       <MainBar />
-      <Text className="title">의약품 검색하기</Text>
-      <Text className="sub">의약품 이름으로 검색해주세요</Text>
       <InputContainer>
         <InputField
           label="검색창"
@@ -102,7 +83,7 @@ function SearchPage() {
             name={medicine.name}
             type={medicine.type}
             imgUrl={medicine.imgUrl}
-            page="search"
+            page="schedule"
           />
         ))}
       </MedicineContainer>
@@ -110,4 +91,4 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default ScheduleSearchPage;
