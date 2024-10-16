@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
-import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -55,8 +54,7 @@ const InputField = styled.input`
 
 function MyPage() {
   const [name, setName] = useState("");
-  const { user } = useUser();
-  //const nickname = `${user.name ? user.name : "건대여신"}`;
+
   return (
     <Container>
       <MainBar />

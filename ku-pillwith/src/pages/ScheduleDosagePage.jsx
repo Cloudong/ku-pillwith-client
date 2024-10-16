@@ -96,7 +96,7 @@ function ScheduleDosagePage(props) {
   useEffect(() => {
     const fetchMedicine = async () => {
       try {
-        const response = await fetch(`/api/medicines/${medicine_id}`);
+        const response = await fetch(`/medicines/${medicine_id}`);
         const data = await response.json();
         setMedicine(data);
       } catch (error) {

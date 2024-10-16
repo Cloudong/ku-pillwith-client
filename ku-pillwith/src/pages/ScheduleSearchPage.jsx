@@ -3,7 +3,6 @@ import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import { FiSearch } from "react-icons/fi";
 import MedicineItem from "../components/MedicineItem";
-import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: calc(100%);
@@ -49,7 +48,6 @@ const MedicineContainer = styled.div`
 function ScheduleSearchPage() {
   const [search, setSearch] = useState("");
   const [medicines, setMedicines] = useState([]);
-  const id = 1;
 
   const handleSearch = async () => {
     if (search.trim() === "") return;
