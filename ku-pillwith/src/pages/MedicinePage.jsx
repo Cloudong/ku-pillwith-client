@@ -104,7 +104,7 @@ function MedicinePage() {
   useEffect(() => {
     const fetchMedicine = async () => {
       try {
-        const response = await fetch(`/api/medicines/${id}`); // API 요청
+        const response = await fetch(`/medicines/${id}`); // API 요청
         const data = await response.json();
         setMedicine(data);
       } catch (error) {

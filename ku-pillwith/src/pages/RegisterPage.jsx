@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: calc(100%);
@@ -56,11 +57,35 @@ function RegisterPage() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3001/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_id: id, password, name: name }),
+      });
+
+      if (response.ok) {
+        navigate("/");
+      } else {
+        console.log(id + " " + name + " " + password);
+        console.error("Register error");
+      }
+    } catch (error) {
+      console.error("Register error:", error);
+    }
+  };
 
   return (
     <Container>
       <MainBar />
-      <RegisterForm onSubmit={() => {}}>
+      <RegisterForm onSubmit={handleRegister}>
         <InputContainer>
           <Text>닉네임</Text>
           <InputField
