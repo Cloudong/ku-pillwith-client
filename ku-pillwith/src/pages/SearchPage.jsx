@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import MainBar from "../bar/MainBar";
@@ -68,11 +68,28 @@ function SearchPage() {
   const [search, setSearch] = useState("");
   const [medicines, setMedicines] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/pills/fetch");
+        if (response.ok) {
+          console.log("Data fetched and stored successfully");
+        } else {
+          console.error("Failed to fetch data");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleSearch = async () => {
     if (search.trim() === "") return;
     try {
       const response = await fetch(
-        `/api/medicines?search=${encodeURIComponent(search)}`
+        `http://localhost:3001/pills/search?query=${encodeURIComponent(search)}`
       );
       const data = await response.json();
       setMedicines(data);
@@ -80,7 +97,6 @@ function SearchPage() {
       console.error("Error fetching medicines:", error);
     }
   };
-
   return (
     <Container>
       <MainBar />
@@ -96,15 +112,20 @@ function SearchPage() {
         <FiSearch size="48" onClick={handleSearch} />
       </InputContainer>
       <MedicineContainer>
-        {medicines.map((medicine) => (
-          <MedicineItem
-            key={medicine.id}
-            name={medicine.name}
-            type={medicine.type}
-            imgUrl={medicine.imgUrl}
-            page="search"
-          />
-        ))}
+        {Array.isArray(medicines) && medicines.length > 0 ? (
+          medicines.map((medicine) => (
+            <MedicineItem
+              key={medicine.id}
+              id={medicine.id}
+              name={medicine.item_name}
+              type={medicine.product_type}
+              imgUrl={medicine.imgUrl}
+              page="search"
+            />
+          ))
+        ) : (
+          <p>검색 결과가 없습니다.</p>
+        )}
       </MedicineContainer>
     </Container>
   );
