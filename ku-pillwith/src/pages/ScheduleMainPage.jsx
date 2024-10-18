@@ -48,7 +48,7 @@ function ScheduleMainPage() {
       <Text
         className="type"
         onClick={() => {
-          navigate("/schedule/morning");
+          navigate("/schedule/아침");
         }}
       >
         아침
@@ -56,7 +56,7 @@ function ScheduleMainPage() {
       <Text
         className="type"
         onClick={() => {
-          navigate("/schedule/afternoon");
+          navigate("/schedule/점심");
         }}
       >
         점심
@@ -64,7 +64,7 @@ function ScheduleMainPage() {
       <Text
         className="type"
         onClick={() => {
-          navigate("/schedule/evening");
+          navigate("/schedule/저녁");
         }}
       >
         저녁

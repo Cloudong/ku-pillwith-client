@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,12 +13,6 @@ const Container = styled.div`
   align-items: center;
   text-align: center;
 `;
-
-const TimeText = {
-  morning: "아침",
-  afternoon: "점심",
-  evening: "저녁",
-};
 
 const Text = styled.div`
   font-family: "Inter", sans-serif;
@@ -47,8 +41,25 @@ const ButtonContainer = styled.div`
 
 function ScheduleListPage() {
   const { time } = useParams();
+  const [schedules, setSchedules] = useState([]);
   const navigate = useNavigate();
-  const Title = `${TimeText[time]} 일정 관리하기`;
+  const Title = `${time} 일정 관리하기`;
+
+  useEffect(() => {
+    const fetchSchedule = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/schedule/schedules`
+        );
+        const data = await response.json();
+        setSchedules(data);
+      } catch (error) {
+        console.error("Error fetching details:", error);
+      }
+    };
+
+    fetchSchedule();
+  }, []);
 
   return (
     <Container>
@@ -57,12 +68,18 @@ function ScheduleListPage() {
       <Text className="sub">
         추가하거나 삭제하고 싶은 의약품을 선택해주세요
       </Text>
-      <ScheduleItem />
+      {Array.isArray(schedules) && schedules.length > 0 ? (
+        schedules.map((schedule) => (
+          <ScheduleItem key={schedule.id} name={schedule.name} />
+        ))
+      ) : (
+        <p>추가된 일정이 없습니다.</p>
+      )}
       <ButtonContainer>
         <Button
           title="추가하기"
           onClick={() => {
-            navigate("/schedule/search");
+            navigate(`/schedule/${time}/search`);
           }}
           className="green"
         />

@@ -68,23 +68,6 @@ function SearchPage() {
   const [search, setSearch] = useState("");
   const [medicines, setMedicines] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3001/pills/fetch");
-        if (response.ok) {
-          console.log("Data fetched and stored successfully");
-        } else {
-          console.error("Failed to fetch data");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   const handleSearch = async () => {
     if (search.trim() === "") return;
     try {
@@ -97,6 +80,7 @@ function SearchPage() {
       console.error("Error fetching medicines:", error);
     }
   };
+
   return (
     <Container>
       <MainBar />

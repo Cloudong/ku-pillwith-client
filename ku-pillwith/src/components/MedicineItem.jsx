@@ -63,7 +63,7 @@ function MedicineItem(props) {
     if (page === "search") {
       navigate(`/medicine/${id}`);
     } else if (page === "schedule") {
-      navigate(`/schedule/search/${id}`);
+      navigate(`${id}`);
     } else {
       console.error("Invalid page prop:", page);
     }

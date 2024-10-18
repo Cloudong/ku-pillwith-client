@@ -57,7 +57,7 @@ const InputField = styled.input`
 function LoginPage() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useUser();
+  const { setUser, setIsLoggedin } = useUser();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -69,6 +69,7 @@ function LoginPage() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ user_id: id, password }),
       });
 
@@ -76,8 +77,8 @@ function LoginPage() {
 
       if (response.ok) {
         console.log("User:", data.user);
+        setIsLoggedin(true);
         setUser(data.user);
-        localStorage.setItem("user", JSON.stringify(data.user));
         navigate("/");
       } else {
         console.error("Login error");
@@ -104,6 +105,7 @@ function LoginPage() {
           <Text>비밀번호</Text>
           <InputField
             label="비밀번호"
+            type="password"
             value={password}
             placeholder="비밀번호를 입력해주세요"
             onChange={(e) => setPassword(e.target.value)}
