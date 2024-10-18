@@ -6,7 +6,6 @@ export const UserProvider = ({ children }) => {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [user, setUser] = useState(null);
 
-  //세션 요청 api
   const checkSession = async () => {
     try {
       const response = await fetch("http://localhost:3001/auth/session", {
@@ -16,7 +15,7 @@ export const UserProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        setUser(data.user); // 사용자 정보 설정
+        setUser(data.user);
         setIsLoggedin(true);
       } else {
         setUser(null);
@@ -29,14 +28,56 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const login = async (user_id, password) => {
+    try {
+      const response = await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ user_id, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.user);
+        setIsLoggedin(true);
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
+    }
+  };
+
+  const logout = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/auth/logout", {
+        method: "DELETE",
+        credentials: "include", // 쿠키 포함
+      });
+
+      if (response.ok) {
+        setUser(null);
+        setIsLoggedin(false);
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
   useEffect(() => {
     checkSession();
   }, []);
 
   return (
-    <UserContext.Provider
-      value={{ user, isLoggedin, setUser, setIsLoggedin, checkSession }}
-    >
+    <UserContext.Provider value={{ user, isLoggedin, login, logout }}>
       {children}
     </UserContext.Provider>
   );

@@ -57,35 +57,15 @@ const InputField = styled.input`
 function LoginPage() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser, setIsLoggedin } = useUser();
+  const { login } = useUser();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch("http://localhost:3001/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ user_id: id, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("User:", data.user);
-        setIsLoggedin(true);
-        setUser(data.user);
-        navigate("/");
-      } else {
-        console.error("Login error");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-    }
+      await login(id, password);
+      navigate("/");
+    } catch (err) {}
   };
 
   return (

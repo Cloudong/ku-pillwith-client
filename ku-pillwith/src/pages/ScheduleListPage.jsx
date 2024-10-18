@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import ScheduleItem from "../components/ScheduleItem";
+import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -42,17 +43,31 @@ const ButtonContainer = styled.div`
 function ScheduleListPage() {
   const { time } = useParams();
   const [schedules, setSchedules] = useState([]);
+  const { user } = useUser();
   const navigate = useNavigate();
   const Title = `${time} 일정 관리하기`;
 
   useEffect(() => {
     const fetchSchedule = async () => {
+      if (!user) {
+        console.log("user not logged in");
+        return;
+      }
+
       try {
         const response = await fetch(
-          `http://localhost:3001/schedule/schedules`
+          "http://localhost:3001/schedule/schedules",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
         );
         const data = await response.json();
         setSchedules(data);
+        console.log(schedules);
       } catch (error) {
         console.error("Error fetching details:", error);
       }
@@ -68,9 +83,15 @@ function ScheduleListPage() {
       <Text className="sub">
         추가하거나 삭제하고 싶은 의약품을 선택해주세요
       </Text>
-      {Array.isArray(schedules) && schedules.length > 0 ? (
+      {schedules.length > 0 ? (
         schedules.map((schedule) => (
-          <ScheduleItem key={schedule.id} name={schedule.name} />
+          <ScheduleItem
+            key={schedule.id}
+            name={schedule.pill_item_name}
+            type={schedule.pill_type}
+            dosage={schedule.pill_dosage}
+            imgUrl={schedule.pill_imgurl}
+          />
         ))
       ) : (
         <p>추가된 일정이 없습니다.</p>
