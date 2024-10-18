@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -55,11 +57,21 @@ const InputField = styled.input`
 function LoginPage() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useUser();
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await login(id, password);
+      navigate("/");
+    } catch (err) {}
+  };
 
   return (
     <Container>
       <MainBar />
-      <LoginForm onSubmit={() => {}}>
+      <LoginForm onSubmit={handleLogin}>
         <InputContainer>
           <Text>아이디</Text>
           <InputField
@@ -73,6 +85,7 @@ function LoginPage() {
           <Text>비밀번호</Text>
           <InputField
             label="비밀번호"
+            type="password"
             value={password}
             placeholder="비밀번호를 입력해주세요"
             onChange={(e) => setPassword(e.target.value)}

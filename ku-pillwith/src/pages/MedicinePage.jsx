@@ -89,22 +89,12 @@ const Image = styled.div`
 
 function MedicinePage() {
   const { id } = useParams();
-
-  //퍼블리싱을 위한 임시 초기데이터
-  const [medicine, setMedicine] = useState({
-    name: "타이레놀정500밀리그람(아세트아미노펜)",
-    ingr_name: "아세트아미노펜",
-    imgUrl: null,
-    type: "[01140]해열.진통.소염제",
-    ee: "감기로 인한 발열 및 동통(통증), 두통뿐만 아니라 신경통, 근육통, 월경통, 염좌통(삔통증)",
-    ud: "만 12세 이상 소아 및 성인: 1회 1~2정씩 1일 3-4회 (4-6시간 마다) 필요시 복용한다. 1일 최대 4그램 (8정)을 초과하여 복용하지 않는다. 이 약은 가능한 최단기간동안 최소 유효용량으로 복용한다.",
-    nb: "만 12세 이상 소아 및 성인: 1회 1~2정씩 1일 3-4회 (4-6시간 마다) 필요시 복용한다. 1일 최대 4그램 (8정)을 초과하여 복용하지 않는다. 이 약은 가능한 최단기간동안 최소 유효용량으로 복용한다.",
-  });
+  const [medicine, setMedicine] = useState();
 
   useEffect(() => {
     const fetchMedicine = async () => {
       try {
-        const response = await fetch(`/api/medicines/${id}`); // API 요청
+        const response = await fetch(`http://localhost:3001/pills/${id}`); // API 요청
         const data = await response.json();
         setMedicine(data);
       } catch (error) {
@@ -122,33 +112,45 @@ function MedicinePage() {
   return (
     <Container>
       <MainBar />
-      <Text className="title">{medicine.name}</Text>
-      <Text className="sub">{medicine.ingr_name}</Text>
+      <Text className="title">{medicine.item_name}</Text>
+      <Text className="sub">{medicine.item_ingr_name}</Text>
       <ImgWrapper>
-        <Image image={medicine.imgUrl ? medicine.imgUrl : MedicineImg}></Image>
+        <Image
+          image={
+            medicine.big_prdt_img_url ? medicine.big_prdt_img_url : MedicineImg
+          }
+        ></Image>
       </ImgWrapper>
       <EffetTextContainer>
         <Text className="effectTitle">약품 효능 : </Text>
         <Text className="effectSub">
-          {medicine.type ? medicine.type : "기재된 효능이 없습니다."}
+          {medicine.product_type
+            ? medicine.product_type
+            : "기재된 효능이 없습니다."}
         </Text>
       </EffetTextContainer>
       <DescriptionTextContainer>
         <Text className="ddTitle">효능효과</Text>
         <Text className="ddSub">
-          {medicine.ee ? medicine.ee : "기재된 효능효과가 없습니다"}
+          {medicine.ee_doc_data
+            ? medicine.ee_doc_data
+            : "기재된 효능효과가 없습니다"}
         </Text>
       </DescriptionTextContainer>
       <DescriptionTextContainer>
         <Text className="ddTitle">용법용량</Text>
         <Text className="ddSub">
-          {medicine.ee ? medicine.ud : "기재된 용법용량이 없습니다"}
+          {medicine.ud_doc_data
+            ? medicine.ud_doc_data
+            : "기재된 용법용량이 없습니다"}
         </Text>
       </DescriptionTextContainer>
       <DescriptionTextContainer>
         <Text className="ddTitle">사용 상의 주의사항</Text>
         <Text className="ddSub">
-          {medicine.ee ? medicine.nb : "기재된 주의사항이 없습니다"}
+          {medicine.nb_doc_data
+            ? medicine.nb_doc_data
+            : "기재된 주의사항이 없습니다"}
         </Text>
       </DescriptionTextContainer>
     </Container>

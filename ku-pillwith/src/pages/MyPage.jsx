@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
 import { useUser } from "../api/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: calc(100%);
@@ -17,8 +18,8 @@ const MyPageForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 80px;
   margin: 16px auto;
+  gap: 30px;
   border: 1px solid #d9d9d9;
   padding: 26px 32px 32px;
   border-radius: 8px;
@@ -55,12 +56,44 @@ const InputField = styled.input`
 
 function MyPage() {
   const [name, setName] = useState("");
-  const { user } = useUser();
-  //const nickname = `${user.name ? user.name : "건대여신"}`;
+  const { logout } = useUser();
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await fetch("http://localhost:3001/auth/update-name", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ new_name: name }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+
+      const data = await response.json();
+      navigate("/");
+      window.location.reload();
+      setSuccess(data.message);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <Container>
       <MainBar />
-      <MyPageForm onSubmit={() => {}}>
+      <MyPageForm onSubmit={handleSubmit}>
         <InputContainer>
           <Text>닉네임 수정하기</Text>
           <InputField
@@ -71,6 +104,14 @@ function MyPage() {
           />
         </InputContainer>
         <Button title="프로필 수정 완료" className="grey" />
+        <Button
+          title="로그아웃"
+          onClick={() => {
+            logout();
+            navigate("/");
+          }}
+          className="red"
+        />
       </MyPageForm>
     </Container>
   );

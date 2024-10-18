@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import MainBar from "../bar/MainBar";
@@ -72,7 +72,7 @@ function SearchPage() {
     if (search.trim() === "") return;
     try {
       const response = await fetch(
-        `/api/medicines?search=${encodeURIComponent(search)}`
+        `http://localhost:3001/pills/search?query=${encodeURIComponent(search)}`
       );
       const data = await response.json();
       setMedicines(data);
@@ -96,15 +96,20 @@ function SearchPage() {
         <FiSearch size="48" onClick={handleSearch} />
       </InputContainer>
       <MedicineContainer>
-        {medicines.map((medicine) => (
-          <MedicineItem
-            key={medicine.id}
-            name={medicine.name}
-            type={medicine.type}
-            imgUrl={medicine.imgUrl}
-            page="search"
-          />
-        ))}
+        {Array.isArray(medicines) && medicines.length > 0 ? (
+          medicines.map((medicine) => (
+            <MedicineItem
+              key={medicine.id}
+              id={medicine.id}
+              name={medicine.item_name}
+              type={medicine.product_type}
+              imgUrl={medicine.imgUrl}
+              page="search"
+            />
+          ))
+        ) : (
+          <p>검색 결과가 없습니다.</p>
+        )}
       </MedicineContainer>
     </Container>
   );

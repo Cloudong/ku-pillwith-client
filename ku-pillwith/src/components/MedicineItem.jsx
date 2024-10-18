@@ -63,7 +63,7 @@ function MedicineItem(props) {
     if (page === "search") {
       navigate(`/medicine/${id}`);
     } else if (page === "schedule") {
-      navigate(`/schedule/search/${id}`);
+      navigate(`${id}`);
     } else {
       console.error("Invalid page prop:", page);
     }
@@ -75,8 +75,8 @@ function MedicineItem(props) {
         <Image image={imgUrl ? imgUrl : MedicineImg}></Image>
       </ImgWrapper>
       <TextContainer>
-        <Text className="title">{name ? name : "약 이름"}</Text>
-        <Text className="sub">{type ? type : "약 정보"}</Text>
+        <Text className="title">{name ? name : "약 이름 정보 없음"}</Text>
+        <Text className="sub">{type ? type : "약 효능 정보 없음"}</Text>
       </TextContainer>
     </Container>
   );

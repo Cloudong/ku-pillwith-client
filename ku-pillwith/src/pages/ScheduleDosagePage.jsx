@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
+import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -77,26 +78,18 @@ const SelectField = styled.select`
 //[todo] : 복용량 -> 텍스트 입력 / 복용단위 -> 드롭다운 입력으로 받기
 //[todo] : 추가하기 버튼 누르면 복용량, 복용단위, user 정보 포함해서 일정 정보 저장(api 통신) -> 목록 페이지로 돌아감
 function ScheduleDosagePage(props) {
-  const { medicine_id } = useParams();
-
-  //퍼블리싱을 위한 임시 초기데이터
-  const [medicine, setMedicine] = useState({
-    name: "타이레놀정500밀리그람(아세트아미노펜)",
-    ingr_name: "아세트아미노펜",
-    imgUrl: null,
-    type: "[01140]해열.진통.소염제",
-    ee: "감기로 인한 발열 및 동통(통증), 두통뿐만 아니라 신경통, 근육통, 월경통, 염좌통(삔통증)",
-    ud: "만 12세 이상 소아 및 성인: 1회 1~2정씩 1일 3-4회 (4-6시간 마다) 필요시 복용한다. 1일 최대 4그램 (8정)을 초과하여 복용하지 않는다. 이 약은 가능한 최단기간동안 최소 유효용량으로 복용한다.",
-    nb: "만 12세 이상 소아 및 성인: 1회 1~2정씩 1일 3-4회 (4-6시간 마다) 필요시 복용한다. 1일 최대 4그램 (8정)을 초과하여 복용하지 않는다. 이 약은 가능한 최단기간동안 최소 유효용량으로 복용한다.",
-  });
+  const { time, id } = useParams();
+  const { user } = useUser();
+  const [medicine, setMedicine] = useState("");
   const [dosage, setDosage] = useState();
   const [unit, setUnit] = useState("mg");
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(time, id);
     const fetchMedicine = async () => {
       try {
-        const response = await fetch(`/api/medicines/${medicine_id}`);
+        const response = await fetch(`http://localhost:3001/pills/${id}`); // API 요청
         const data = await response.json();
         setMedicine(data);
       } catch (error) {
@@ -105,13 +98,20 @@ function ScheduleDosagePage(props) {
     };
 
     fetchMedicine();
-  }, [medicine_id]);
+  }, [id]);
 
   const handleSubmit = async () => {
-    const scheduleData = { dosage: `${dosage}${unit}`, medicine_id };
+    const scheduleData = {
+      user_id: user.id,
+      type: time,
+      pill_id: Number(id),
+      pill_imgurl: medicine.big_prdt_img_url,
+      pill_dosage: `${dosage}${unit}`,
+      pill_type: medicine.product_type,
+    };
 
     try {
-      const response = await fetch("/api/schedules", {
+      const response = await fetch("http://localhost:3001/schedule/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +120,7 @@ function ScheduleDosagePage(props) {
       });
 
       if (response.ok) {
-        navigate("/schedule");
+        navigate(`/schedule/${time}`);
       } else {
         console.error("Failed to save schedule");
       }
@@ -132,8 +132,8 @@ function ScheduleDosagePage(props) {
   return (
     <Container>
       <MainBar />
-      <Text className="title">{medicine.name}</Text>
-      <Text className="sub">{medicine.type}</Text>
+      <Text className="title">{medicine.item_name}</Text>
+      <Text className="sub">{medicine.product_type}</Text>
       <FieldContainer>
         <Text className="label">복용량</Text>
         <InputField

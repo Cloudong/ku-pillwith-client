@@ -23,8 +23,11 @@ function Router() {
         <Route path="/medicine/:id" element={<MedicinePage />} />
         <Route path="/schedule" element={<ScheduleMainPage />} />
         <Route path="/schedule/:time" element={<ScheduleListPage />} />
-        <Route path="/schedule/search" element={<ScheduleSearchPage />} />
-        <Route path="/schedule/search/:id" element={<ScheduleDosagePage />} />
+        <Route path="/schedule/:time/search" element={<ScheduleSearchPage />} />
+        <Route
+          path="/schedule/:time/search/:id"
+          element={<ScheduleDosagePage />}
+        />
       </Routes>
     </BrowserRouter>
   );

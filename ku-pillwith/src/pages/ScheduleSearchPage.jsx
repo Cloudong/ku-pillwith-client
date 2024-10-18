@@ -3,7 +3,7 @@ import styled from "styled-components";
 import MainBar from "../bar/MainBar";
 import { FiSearch } from "react-icons/fi";
 import MedicineItem from "../components/MedicineItem";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div`
   width: calc(100%);
@@ -47,15 +47,15 @@ const MedicineContainer = styled.div`
 //[todo] : 약 아이템 클릭-> 복용량 수정 페이지 이동
 
 function ScheduleSearchPage() {
+  const { time } = useParams();
   const [search, setSearch] = useState("");
   const [medicines, setMedicines] = useState([]);
-  const id = 1;
 
   const handleSearch = async () => {
     if (search.trim() === "") return;
     try {
       const response = await fetch(
-        `/api/medicines?search=${encodeURIComponent(search)}`
+        `http://localhost:3001/pills/search?query=${encodeURIComponent(search)}`
       );
       const data = await response.json();
       setMedicines(data);
@@ -77,15 +77,20 @@ function ScheduleSearchPage() {
         <FiSearch size="48" onClick={handleSearch} />
       </InputContainer>
       <MedicineContainer>
-        {medicines.map((medicine) => (
-          <MedicineItem
-            key={medicine.id}
-            name={medicine.name}
-            type={medicine.type}
-            imgUrl={medicine.imgUrl}
-            page="schedule"
-          />
-        ))}
+        {Array.isArray(medicines) && medicines.length > 0 ? (
+          medicines.map((medicine) => (
+            <MedicineItem
+              key={medicine.id}
+              id={medicine.id}
+              name={medicine.item_name}
+              type={medicine.product_type}
+              imgUrl={medicine.imgUrl}
+              page="schedule"
+            />
+          ))
+        ) : (
+          <p>검색 결과가 없습니다.</p>
+        )}
       </MedicineContainer>
     </Container>
   );
