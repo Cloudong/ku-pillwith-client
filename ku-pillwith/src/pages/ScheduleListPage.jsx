@@ -66,7 +66,10 @@ function ScheduleListPage() {
           }
         );
         const data = await response.json();
-        setSchedules(data);
+        const filtereddata = data.schedules.filter(
+          (schedule) => schedule.type === time
+        );
+        setSchedules(filtereddata);
         console.log(schedules);
       } catch (error) {
         console.error("Error fetching details:", error);
@@ -87,6 +90,7 @@ function ScheduleListPage() {
         schedules.map((schedule) => (
           <ScheduleItem
             key={schedule.id}
+            id={schedule.id}
             name={schedule.pill_item_name}
             type={schedule.pill_type}
             dosage={schedule.pill_dosage}
@@ -107,7 +111,7 @@ function ScheduleListPage() {
         <Button
           title="완료"
           onClick={() => {
-            navigate("/");
+            navigate("/schedule");
           }}
           className="grey"
         />

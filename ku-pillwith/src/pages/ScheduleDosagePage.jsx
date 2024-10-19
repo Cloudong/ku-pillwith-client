@@ -105,6 +105,7 @@ function ScheduleDosagePage(props) {
       user_id: user.id,
       type: time,
       pill_id: Number(id),
+      pill_item_name: medicine.item_name,
       pill_imgurl: medicine.big_prdt_img_url,
       pill_dosage: `${dosage}${unit}`,
       pill_type: medicine.product_type,
