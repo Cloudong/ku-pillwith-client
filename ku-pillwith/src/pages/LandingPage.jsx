@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import LandingImg from "../assets/Landing_main.png";
 import Landing_1 from "../assets/Landing_1.png";
 import Landing_2 from "../assets/Landing_2.png";
 import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
+import ScheduleItem from "../components/ScheduleItem";
 import { useUser } from "../api/UserContext";
 import { useNavigate } from "react-router-dom";
+import LandingScheduleItem from "../components/LandingScheduleItem";
 
 const Container = styled.div`
   width: calc(100%);
@@ -32,6 +34,12 @@ const ScheduleWrapper = styled.div`
   flex-direction: column;
   background-color: #fbfbfb;
   padding: 40px 0;
+`;
+
+const ListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ButtonContainer = styled.div`
@@ -131,6 +139,10 @@ const Image = styled.div`
 
 function LandingPage() {
   const { user } = useUser();
+  const [schedules, setSchedules] = useState([]);
+  const [morning, setMorning] = useState([]);
+  const [afternoon, setAfternoon] = useState([]);
+  const [evening, setEvening] = useState([]);
   const navigate = useNavigate();
 
   const MainTitle = "우리 가족 의약품\n복용 일정 관리";
@@ -147,6 +159,50 @@ function LandingPage() {
   const LoginMainTitle = `안녕하세요,\n${user ? user.name : "사용자"}님`;
   const LoginMainSubTitle =
     "약을 정해진 시간에 잘 복용하고 계신가요?\n이제 쉽고, 편리하게\nKU_PILLWITH로 관리하세요";
+
+  useEffect(() => {
+    const fetchSchedule = async () => {
+      if (!user) {
+        console.log("user not logged in");
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          "http://localhost:3001/schedule/schedules",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+        const data = await response.json();
+        const filtereddata = data.schedules.filter(
+          (schedule) => schedule.user_id === user.id
+        );
+        const morningdata = data.schedules.filter(
+          (schedule) => schedule.type === "아침"
+        );
+        const afternoondata = data.schedules.filter(
+          (schedule) => schedule.type === "점심"
+        );
+        const eveningdata = data.schedules.filter(
+          (schedule) => schedule.type === "저녁"
+        );
+        setSchedules(filtereddata);
+        setMorning(morningdata);
+        setAfternoon(afternoondata);
+        setEvening(eveningdata);
+        console.log(schedules);
+      } catch (error) {
+        console.error("Error fetching details:", error);
+      }
+    };
+
+    fetchSchedule();
+  }, []);
 
   return (
     <Container>
@@ -188,11 +244,58 @@ function LandingPage() {
               />
             </UserContainer>
             <UserContainer>
-              <Text className="type">아침</Text>
-              <Text className="type">점심</Text>
-              <Text className="type">저녁</Text>
+              <ListWrapper>
+                <Text className="type">아침</Text>
+                {morning.length > 0 ? (
+                  morning.map((schedule) => (
+                    <LandingScheduleItem
+                      key={schedule.id}
+                      id={schedule.id}
+                      name={schedule.pill_item_name}
+                      type={schedule.pill_type}
+                      dosage={schedule.pill_dosage}
+                      imgUrl={schedule.pill_imgurl}
+                    />
+                  ))
+                ) : (
+                  <p>추가된 일정이 없습니다.</p>
+                )}
+              </ListWrapper>
+              <ListWrapper>
+                <Text className="type">점심</Text>
+                {afternoon.length > 0 ? (
+                  afternoon.map((schedule) => (
+                    <LandingScheduleItem
+                      key={schedule.id}
+                      id={schedule.id}
+                      name={schedule.pill_item_name}
+                      type={schedule.pill_type}
+                      dosage={schedule.pill_dosage}
+                      imgUrl={schedule.pill_imgurl}
+                    />
+                  ))
+                ) : (
+                  <p>추가된 일정이 없습니다.</p>
+                )}
+              </ListWrapper>
+              <ListWrapper>
+                <Text className="type">저녁</Text>
+                {evening.length > 0 ? (
+                  evening.map((schedule) => (
+                    <LandingScheduleItem
+                      key={schedule.id}
+                      id={schedule.id}
+                      name={schedule.pill_item_name}
+                      type={schedule.pill_type}
+                      dosage={schedule.pill_dosage}
+                      imgUrl={schedule.pill_imgurl}
+                    />
+                  ))
+                ) : (
+                  <p>추가된 일정이 없습니다.</p>
+                )}
+              </ListWrapper>
             </UserContainer>
-            {/* [todo] : 사용자 복용 일정 표시하기 */}
           </ScheduleWrapper>
         </>
       ) : (

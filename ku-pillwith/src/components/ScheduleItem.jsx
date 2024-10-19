@@ -57,7 +57,25 @@ const Text = styled.div`
 
 //[todo] : 삭제 버튼 클릭 후 사용자 일정 목록에서 제외 기능 구현
 function ScheduleItem(props) {
-  const { name, type, dosage, imgUrl } = props;
+  const { id, name, type, dosage, imgUrl } = props;
+
+  const DeleteSchedule = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/schedule/${id}`, {
+        method: "DELETE",
+        credentials: "include", // 쿠키 포함
+      });
+
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+    }
+  };
   return (
     <Container>
       <DescriptionContainer>
@@ -68,7 +86,7 @@ function ScheduleItem(props) {
           <Text className="dosage">{dosage ? dosage : "복용량"}</Text>
         </TextContainer>
       </DescriptionContainer>
-      <Button title="삭제" onClick={() => {}} className="red" />
+      <Button title="삭제" onClick={DeleteSchedule} className="red" />
     </Container>
   );
 }
