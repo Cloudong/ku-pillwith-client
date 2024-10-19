@@ -77,7 +77,7 @@ function ScheduleListPage() {
     };
 
     fetchSchedule();
-  }, []);
+  }, [user]);
 
   return (
     <Container>
@@ -111,7 +111,7 @@ function ScheduleListPage() {
         <Button
           title="완료"
           onClick={() => {
-            navigate("/schedule");
+            navigate("/");
           }}
           className="grey"
         />
