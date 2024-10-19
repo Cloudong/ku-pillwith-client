@@ -202,7 +202,7 @@ function LandingPage() {
     };
 
     fetchSchedule();
-  }, []);
+  }, [user]);
 
   return (
     <Container>
