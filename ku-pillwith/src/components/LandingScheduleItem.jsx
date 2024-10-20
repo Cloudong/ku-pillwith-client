@@ -16,11 +16,12 @@ const DescriptionContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  gap: 10px;
 `;
 
 const Image = styled.div`
-  width: 100px;
-  height: 79px;
+  width: 110px;
+  height: 61px;
   background-image: url(${(props) => props.image});
   background-size: cover;
   background-position: center;

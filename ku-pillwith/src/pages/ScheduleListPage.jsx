@@ -38,6 +38,8 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 60px;
+  padding-top: 40px;
+  padding-bottom: 80px;
 `;
 
 function ScheduleListPage() {

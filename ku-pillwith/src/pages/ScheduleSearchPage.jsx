@@ -84,7 +84,7 @@ function ScheduleSearchPage() {
               id={medicine.id}
               name={medicine.item_name}
               type={medicine.product_type}
-              imgUrl={medicine.imgUrl}
+              imgUrl={medicine.big_prdt_img_url}
               page="schedule"
             />
           ))
