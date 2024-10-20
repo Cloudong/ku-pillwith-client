@@ -69,19 +69,9 @@ const DescriptionTextContainer = styled.div`
   text-align: left;
 `;
 
-const ImgWrapper = styled.div`
-  width: 500px;
-  height: 316px;
-  border: 1px solid black;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Image = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: 272px;
   background-image: url(${(props) => props.image});
   background-size: cover;
   background-position: center;
@@ -114,13 +104,11 @@ function MedicinePage() {
       <MainBar />
       <Text className="title">{medicine.item_name}</Text>
       <Text className="sub">{medicine.item_ingr_name}</Text>
-      <ImgWrapper>
-        <Image
-          image={
-            medicine.big_prdt_img_url ? medicine.big_prdt_img_url : MedicineImg
-          }
-        ></Image>
-      </ImgWrapper>
+      <Image
+        image={
+          medicine.big_prdt_img_url ? medicine.big_prdt_img_url : MedicineImg
+        }
+      ></Image>
       <EffetTextContainer>
         <Text className="effectTitle">약품 효능 : </Text>
         <Text className="effectSub">

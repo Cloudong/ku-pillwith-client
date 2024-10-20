@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import MainBar from "../bar/MainBar";
@@ -103,7 +103,7 @@ function SearchPage() {
               id={medicine.id}
               name={medicine.item_name}
               type={medicine.product_type}
-              imgUrl={medicine.imgUrl}
+              imgUrl={medicine.big_prdt_img_url}
               page="search"
             />
           ))

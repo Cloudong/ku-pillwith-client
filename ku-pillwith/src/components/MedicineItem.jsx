@@ -11,19 +11,9 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const ImgWrapper = styled.div`
-  width: 150px;
-  height: 95px;
-  border: 1px solid black;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Image = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 147px;
+  height: 80px;
   background-image: url(${(props) => props.image});
   background-size: cover;
   background-position: center;
@@ -71,9 +61,7 @@ function MedicineItem(props) {
 
   return (
     <Container onClick={handleClick}>
-      <ImgWrapper>
-        <Image image={imgUrl ? imgUrl : MedicineImg}></Image>
-      </ImgWrapper>
+      <Image image={imgUrl ? imgUrl : MedicineImg}></Image>
       <TextContainer>
         <Text className="title">{name ? name : "약 이름 정보 없음"}</Text>
         <Text className="sub">{type ? type : "약 효능 정보 없음"}</Text>
