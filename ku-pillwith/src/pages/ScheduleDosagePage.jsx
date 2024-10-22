@@ -89,7 +89,7 @@ function ScheduleDosagePage(props) {
     console.log(time, id);
     const fetchMedicine = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/pills/${id}`); // API 요청
+        const response = await fetch(`http://3.39.227.185:3001/pills/${id}`); // API 요청
         const data = await response.json();
         setMedicine(data);
       } catch (error) {
@@ -112,7 +112,7 @@ function ScheduleDosagePage(props) {
     };
 
     try {
-      const response = await fetch("http://localhost:3001/schedule/register", {
+      const response = await fetch("http://3.39.227.185:3001schedule/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

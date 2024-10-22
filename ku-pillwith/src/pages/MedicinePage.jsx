@@ -84,7 +84,7 @@ function MedicinePage() {
   useEffect(() => {
     const fetchMedicine = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/pills/${id}`); // API 요청
+        const response = await fetch(`http://3.39.227.185:3001/pills/${id}`); // API 요청
         const data = await response.json();
         setMedicine(data);
       } catch (error) {

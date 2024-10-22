@@ -62,7 +62,7 @@ function ScheduleItem(props) {
 
   const DeleteSchedule = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/schedule/${id}`, {
+      const response = await fetch(`http://3.39.227.185:3001/schedule/${id}`, {
         method: "DELETE",
         credentials: "include", // 쿠키 포함
       });

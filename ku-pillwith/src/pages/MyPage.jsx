@@ -67,7 +67,7 @@ function MyPage() {
     setSuccess(null);
 
     try {
-      const response = await fetch("http://localhost:3001/auth/update-name", {
+      const response = await fetch("http://3.39.227.185:3001/auth/update-name", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -58,7 +58,7 @@ function ScheduleListPage() {
 
       try {
         const response = await fetch(
-          "http://localhost:3001/schedule/schedules",
+          "http://3.39.227.185:3001/schedule/schedules",
           {
             method: "GET",
             headers: {

@@ -63,7 +63,7 @@ function RegisterPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/auth/register", {
+      const response = await fetch("http://3.39.227.185:3001/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
