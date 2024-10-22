@@ -5,7 +5,6 @@ import Landing_1 from "../assets/Landing_1.png";
 import Landing_2 from "../assets/Landing_2.png";
 import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
-import ScheduleItem from "../components/ScheduleItem";
 import { useUser } from "../api/UserContext";
 import { useNavigate } from "react-router-dom";
 import LandingScheduleItem from "../components/LandingScheduleItem";
@@ -169,7 +168,7 @@ function LandingPage() {
 
       try {
         const response = await fetch(
-          "http://3.39.227.185:3001/schedule/schedules",
+          "http://3.39.227.185:3001/api/schedule/schedules",
           {
             method: "GET",
             headers: {

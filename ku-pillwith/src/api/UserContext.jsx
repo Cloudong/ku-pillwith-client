@@ -8,10 +8,13 @@ export const UserProvider = ({ children }) => {
 
   const checkSession = async () => {
     try {
-      const response = await fetch("http://3.39.227.185:3001/auth/session", {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetch(
+        "http://3.39.227.185:3001/api/auth/session",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -30,7 +33,7 @@ export const UserProvider = ({ children }) => {
 
   const login = async (user_id, password) => {
     try {
-      const response = await fetch("http://3.39.227.185:3001/auth/login", {
+      const response = await fetch("http://3.39.227.185:3001/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +58,7 @@ export const UserProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const response = await fetch("http://3.39.227.185:3001/auth/logout", {
+      const response = await fetch("http://3.39.227.185:3001/api/auth/logout", {
         method: "DELETE",
         credentials: "include", // 쿠키 포함
       });

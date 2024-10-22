@@ -72,7 +72,7 @@ function SearchPage() {
     if (search.trim() === "") return;
     try {
       const response = await fetch(
-        `http://3.39.227.185:3001/pills/search?query=${encodeURIComponent(search)}`
+        `http://3.39.227.185:3001/api/pills/search?query=${encodeURIComponent(search)}`
       );
       const data = await response.json();
       setMedicines(data);
