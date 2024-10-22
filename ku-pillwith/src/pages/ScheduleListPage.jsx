@@ -81,6 +81,27 @@ function ScheduleListPage() {
     fetchSchedule();
   }, [user]);
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        `http://3.39.227.185:3001/api/schedule/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include", // 쿠키 포함
+        }
+      );
+
+      if (response.ok) {
+        setSchedules(schedules.filter((schedule) => schedule.id !== id));
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+    }
+  };
+
   return (
     <Container>
       <MainBar />
@@ -97,6 +118,7 @@ function ScheduleListPage() {
             type={schedule.pill_type}
             dosage={schedule.pill_dosage}
             imgUrl={schedule.pill_imgurl}
+            onDelete={handleDelete}
           />
         ))
       ) : (
