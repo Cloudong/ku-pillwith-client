@@ -112,13 +112,16 @@ function ScheduleDosagePage(props) {
     };
 
     try {
-      const response = await fetch("http://3.39.227.185:3001schedule/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(scheduleData),
-      });
+      const response = await fetch(
+        "http://3.39.227.185:3001/schedule/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(scheduleData),
+        }
+      );
 
       if (response.ok) {
         navigate(`/schedule/${time}`);
